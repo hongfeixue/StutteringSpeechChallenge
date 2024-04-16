@@ -6,10 +6,10 @@ stop_stage=0
 num_utts_per_shard=500
 
 # Entire repo local dir, which should contain ./asr, ./data and ./sed
-project_dir=
+project_dir=/home/work_nfs4_ssd/hfxue/workspace/StutteringSpeechChallenge
 
 # Please update the variable to include downloaded data:
-raw_data_dir=
+raw_data_dir=/home/41_data/hfxue/corpus/Stutteringspeech
 
 nj=16
 
