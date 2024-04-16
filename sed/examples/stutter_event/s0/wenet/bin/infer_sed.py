@@ -27,7 +27,6 @@ from wenet.dataset.dataset_sed import Dataset
 from wenet.utils.checkpoint import load_checkpoint
 from wenet.utils.config import override_config
 from wenet.utils.init_model import init_model
-from wenet.utils.context_graph import ContextGraph
 
 
 def get_args():
@@ -68,15 +67,20 @@ def calc_hit_hyp_ref(results, target):
     return hit, hyp, ref
 
 def calc_rec_prec_f1(hit, hyp, ref):
-    def to_string(t):
-        return '\t'.join([str(round(r * 100, 2)) for r in t.tolist()])
+    def to_string(t, do_round=True):
+        return '\t'.join([str(round(r * 100, 2)) if do_round else str(r) for r in t.tolist()])
     rec = hit / ref
     prec = hit / hyp
     f1 = 2 * rec * prec / (rec + prec)
-    print('\t/p\t/b\t/r\t/wr\t/i')
-    print('Rec:\t'+to_string(rec))
-    print('Prec:\t'+to_string(prec))
-    print('F1:\t'+to_string(f1))
+    out = ''
+    out += '\t/p\t/b\t/r\t/wr\t/i\n'
+    out += 'Rec:\t'+to_string(rec)+'\n'
+    out += 'Prec:\t'+to_string(prec)+'\n'
+    out += 'F1:\t'+to_string(f1)+'\n'
+    out += 'hit:\t'+to_string(hit, False)+'\n'
+    out += 'hyp:\t'+to_string(hyp, False)+'\n'
+    out += 'ref:\t'+to_string(ref, False)+'\n'
+    return out
 
 def main():
     args = get_args()
@@ -125,19 +129,16 @@ def main():
     device = torch.device('cuda' if use_cuda else 'cpu')
     model = model.to(device)
     model.eval()
-    threshold = torch.Tensor([[0.4, 0.35, 0.35, 0.35, 0.3]]).to(device)
+    # The thresholds can be modified to fit different models
+    threshold = torch.Tensor([[0.40, 0.30, 0.30, 0.40, 0.30]]).to(device)
     print(f'threshold {threshold}')
 
     # TODO(Dinghao Zhou): Support RNN-T related decoding
     # TODO(Lv Xiang): Support k2 related decoding
     # TODO(Kaixun Huang): Support context graph
-    files = {}
-    #for mode in args.modes:
-    #    dir_name = os.path.join(args.result_dir, mode)
-    #    os.makedirs(dir_name, exist_ok=True)
-    #    file_name = os.path.join(dir_name, 'text')
-    #    files[mode] = open(file_name, 'w')
-    #max_format_len = max([len(mode) for mode in args.modes])
+    f = open(os.path.join(args.result_dir, 'results.txt'), 'w')
+    f_hyps = open(os.path.join(args.result_dir, 'sed_hyps.txt'), 'w')
+
     with torch.no_grad():
         hit_all = torch.Tensor([0, 0, 0, 0, 0]).to(device)
         hyp_all = torch.Tensor([0, 0, 0, 0, 0]).to(device)
@@ -156,23 +157,17 @@ def main():
             hit_all += hit
             hyp_all += hyp
             ref_all += ref
+            for i, key in enumerate(keys):
+                for hyps in results:
+                    result = ','.join(str(x) for x in hyps.tolist())
+                    f_hyps.write(key + ' ' + result + '\n')
             #logging.info(f'batch: {batch_idx}')
+    f_hyps.close()
+    stats_all = calc_rec_prec_f1(hit_all, hyp_all, ref_all)
+    print(stats_all)
 
-        hit_rand = torch.Tensor([0, 0, 0, 0, 0]).to(device)
-        hyp_rand = torch.Tensor([0, 0, 0, 0, 0]).to(device)
-        ref_rand = torch.Tensor([0, 0, 0, 0, 0]).to(device)
-        for batch_idx, batch in enumerate(test_data_loader):
-            keys, feats, target, feats_lengths, target_lengths = batch
-            target = target.to(device)
-            results = torch.randint(0, 2, target.shape, device=device)
-            hit, hyp, ref = calc_hit_hyp_ref(results, target)
-            hit_rand += hit
-            hyp_rand += hyp
-            ref_rand += ref
-            #logging.info(f'batch: {batch_idx}')
-
-    calc_rec_prec_f1(hit_all, hyp_all, ref_all)
-    calc_rec_prec_f1(hit_rand, hyp_rand, ref_rand)
+    f.write(stats_all)
+    f.close()
 
 if __name__ == '__main__':
     main()
