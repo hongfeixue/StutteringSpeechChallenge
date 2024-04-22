@@ -8,8 +8,8 @@ Please refer to `run.sh` for data preprocessing, training and evaluation. The tr
 ## Results
 The evaluation results of the Wenet Conformer model are as follows:
 
+Test:
 ```
-
 Level     |Category
 ----------|------------
 mild      |conversation:        CER=16.17% N= 92786 C= 81594 D=2986 S=8206 I=3814
@@ -24,4 +24,9 @@ severe    |all         :        CER=28.53% N= 25005 C= 19322 D=1388 S=4295 I=145
 all       |conversation:        CER=17.78% N=120640 C=105162 D=4220 S=11258 I=5973
 all       |command     :        CER=19.73% N= 62718 C= 50755 D=1992 S=9971 I= 413
 all       |all         :        CER=18.45% N=183358 C=155917 D=6212 S=21229 I=6386
+```
+
+Dev:
+```
+all       |all         :        CER=14.85 % N=95612 C=85106 D=2770 S=7736 I=3692
 ```
