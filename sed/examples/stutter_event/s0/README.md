@@ -1,4 +1,4 @@
-# Wenet
+![image](https://github.com/hongfeixue/StutteringSpeechChallenge/assets/63407850/0255b3f4-231d-4e60-914a-63a8b8be08ab)# Wenet
 This code has addtional components for [Wenet](https://github.com/wenet-e2e/wenet) (git commit: 188e5e9c2c3250f4ed44af4a09d2a8866e4a0ab6). Please check `examples` and `wenet` folders.
 
 SED is a multi-label multi-class tagging problem. By giving a stuttering speech audio snippet, the system aims to tag five stuttering events:
@@ -36,6 +36,7 @@ In Category, we have 3 kinds of labels. `A`: interviewee conversation (person wh
 
 Confomer + sigmoid cross entropy loss  
 This is a model with 3 blocks Conformer encoder that is trained with sigmoid cross entropy loss.
+Test:
 ```
 all/all
         /p      /b      /r      []      /i      avg
@@ -52,4 +53,12 @@ all/comm
 rec:    65.43   21.76   49.84   59.70   83.82   56.11
 prec:   53.36   31.11   65.42   50.59   51.24   50.34
 f1:     58.78   25.61   56.58   54.77   63.60   51.87
+```
+
+Dev:
+```
+        /p      /b      /r      /wr     /i      avg
+rec:    60.22   42.36   38.46   64.81   59.39   53.05
+prec:   63.17   46.99   40.44   65.54   60.83   55.39
+f1:     61.66   44.56   39.43   65.17   60.1    54.18
 ```
