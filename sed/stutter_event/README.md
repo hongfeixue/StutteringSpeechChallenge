@@ -13,7 +13,7 @@ SED is a multi-label multi-class tagging problem. By giving a stuttering speech 
 
 We prepare the data by cutting long utterances into short snippets. The cut is done on the word time boundaries which have been identified by conducting forced alignment between the audios and the transcriptions.
 
-The dataset contains 41953 audio snippets, of which the average length is 4.19s.
+The train dataset contains 26659 audio snippets.
 
 An annotation example:
 
