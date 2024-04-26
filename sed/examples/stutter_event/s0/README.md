@@ -1,4 +1,4 @@
-![image](https://github.com/hongfeixue/StutteringSpeechChallenge/assets/63407850/0255b3f4-231d-4e60-914a-63a8b8be08ab)# Wenet
+# Wenet
 This code has addtional components for [Wenet](https://github.com/wenet-e2e/wenet) (git commit: 188e5e9c2c3250f4ed44af4a09d2a8866e4a0ab6). Please check `examples` and `wenet` folders.
 
 SED is a multi-label multi-class tagging problem. By giving a stuttering speech audio snippet, the system aims to tag five stuttering events:
