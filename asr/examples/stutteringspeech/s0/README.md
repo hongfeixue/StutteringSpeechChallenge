@@ -12,18 +12,18 @@ Test:
 ```
 Level     |Category
 ----------|------------
-mild      |conversation:        CER=16.17% N= 92786 C= 81594 D=2986 S=8206 I=3814
-moderate  |conversation:        CER=17.80% N= 15122 C= 13291 D= 539 S=1292 I= 860
-severe    |conversation:        CER=29.48% N= 12732 C= 10277 D= 695 S=1760 I=1299
-mild      |command     :        CER=17.48% N= 43698 C= 36262 D=1105 S=6331 I= 201
-moderate  |command     :        CER=20.14% N=  6747 C=  5448 D= 194 S=1105 I=  60
-severe    |command     :        CER=27.54% N= 12273 C=  9045 D= 693 S=2535 I= 152
-mild      |all         :        CER=16.59% N=136484 C=117856 D=4091 S=14537 I=4015
-moderate  |all         :        CER=18.52% N= 21869 C= 18739 D= 733 S=2397 I= 920
-severe    |all         :        CER=28.53% N= 25005 C= 19322 D=1388 S=4295 I=1451
-all       |conversation:        CER=17.78% N=120640 C=105162 D=4220 S=11258 I=5973
-all       |command     :        CER=19.73% N= 62718 C= 50755 D=1992 S=9971 I= 413
-all       |all         :        CER=18.45% N=183358 C=155917 D=6212 S=21229 I=6386
+mild      |conversation:        WER=15.94% N= 56205 C= 49345 D=1801 S=5059 I=2100
+moderate  |conversation:        WER=17.50% N=  9115 C=  8028 D= 292 S= 795 I= 508
+severe    |conversation:        WER=30.95% N=  7602 C=  6073 D= 460 S=1069 I= 824
+mild      |command     :        WER=19.55% N= 32838 C= 26566 D=1701 S=4571 I= 149
+moderate  |command     :        WER=22.72% N=  5413 C=  4212 D= 354 S= 847 I=  29
+severe    |command     :        WER=28.25% N=  8480 C=  6156 D= 612 S=1712 I=  72
+mild      |all         :        WER=17.27% N= 89043 C= 75911 D=3502 S=9630 I=2249
+moderate  |all         :        WER=19.45% N= 14528 C= 12240 D= 646 S=1642 I= 537
+severe    |all         :        WER=29.53% N= 16082 C= 12229 D=1072 S=2781 I= 896
+all       |conversation:        WER=17.70% N= 72922 C= 63446 D=2553 S=6923 I=3432
+all       |command     :        WER=21.50% N= 46731 C= 36934 D=2667 S=7130 I= 250
+all       |all         :        WER=19.18% N=119653 C=100380 D=5220 S=14053 I=3682
 ```
 
 Dev:
