@@ -157,10 +157,9 @@ def main():
             hit_all += hit
             hyp_all += hyp
             ref_all += ref
-            for i, key in enumerate(keys):
-                for hyps in results:
-                    result = ','.join(str(x) for x in hyps.tolist())
-                    f_hyps.write(key + ' ' + result + '\n')
+            for i, (key, hyps) in enumerate(zip(keys, results)):
+                result = ','.join(str(x) for x in hyps.tolist())
+                f_hyps.write(key + ' ' + result + '\n')
             #logging.info(f'batch: {batch_idx}')
     f_hyps.close()
     stats_all = calc_rec_prec_f1(hit_all, hyp_all, ref_all)
